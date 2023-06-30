@@ -117,5 +117,10 @@ export async function handleSearch(event) {
   const searchInput = document.getElementById('search-input');
   const searchValue = searchInput.value;
   const citiesData = await searchCities(searchValue);
-  Promise.all(citiesData.map(({ url }) => getWeatherByCity(url)));
+  const allCitiesList = document.getElementById('cities');
+  const allPromises = await Promise.all(citiesData
+    .map(({ url }) => getWeatherByCity(url)));
+  allPromises.forEach((currentWeather) => {
+    allCitiesList.appendChild(createCityElement(currentWeather));
+  });
 }
