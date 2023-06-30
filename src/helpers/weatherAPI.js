@@ -14,7 +14,19 @@ export const searchCities = async (term) => {
     return [];
   }
 };
+// console.log(searchCities('São Paulo'));
 
-export const getWeatherByCity = (/* cityURL */) => {
-  //   seu código aqui
+export const getWeatherByCity = async (cityURL) => {
+  const weatherAPI = `http://api.weatherapi.com/v1/current.json?lang=pt&key=${weatherToken}&q=${cityURL}`;
+  const result = await fetch(weatherAPI);
+  const data = await result.json();
+  const { current } = data;
+  const currentWeather = {
+    temp: current.temp_c,
+    condition: current.condition.text,
+    icon: current.condition.icon,
+    url: cityURL,
+  };
+  return currentWeather;
 };
+// console.log(getWeatherByCity('sao-paulo-sao-paulo-brazil'));
