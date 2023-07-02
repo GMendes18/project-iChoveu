@@ -1,4 +1,3 @@
-// Remova os comentários a medida que for implementando as funções
 const weatherToken = import.meta.env.VITE_TOKEN;
 
 export const searchCities = async (term) => {
@@ -6,7 +5,7 @@ export const searchCities = async (term) => {
   try {
     const result = await fetch(weatherAPI);
     const data = await result.json();
-    if (!data.lenght) {
+    if (!data.length) {
       window.alert('Nenhuma cidade encontrada');
     }
     return data;
